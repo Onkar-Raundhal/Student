@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/bg">
+
+    <TextView
+        android:id="@+id/Heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.AppCompat.Headline"
+        android:text=" STUDENT PANEL"
+        android:drawableStart="@drawable/student"
+        android:textStyle="bold"
+        android:layout_marginTop="20sp"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@id/btn_ADD"
+        />
+
+    <Button
+        android:id="@+id/btn_ADD"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10sp"
+        android:drawableTop="@drawable/add"
+        android:elevation="3dp"
+        android:padding="25sp"
+        android:text="@string/Add_data"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@id/btn_DISPLAY"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/Heading"
+        />
+
+    <Button
+        android:id="@+id/btn_DISPLAY"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:text="@string/Display_Data"
+        android:textSize="25sp"
+        android:padding="25sp"
+        android:layout_marginTop="30sp"
+        android:elevation="3dp"
+        android:drawableTop="@drawable/display"
+        app:layout_constraintTop_toBottomOf="@id/btn_ADD"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintBottom_toTopOf="@id/btn_UPDATE"
+        />
+
+    <Button
+        android:id="@+id/btn_UPDATE"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:text="@string/Update_Data"
+        android:textSize="25sp"
+        android:padding="25sp"
+        android:layout_marginTop="30sp"
+        android:elevation="3dp"
+        android:drawableTop="@drawable/update"
+        app:layout_constraintTop_toBottomOf="@id/btn_DISPLAY"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintBottom_toTopOf="@id/btn_DELETE"
+        />
+
+    <Button
+        android:id="@+id/btn_DELETE"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:text="@string/Delete_Data"
+        android:textSize="25sp"
+        android:padding="25sp"
+        android:layout_marginTop="30sp"
+        android:elevation="3dp"
+        android:drawableTop="@drawable/delete"
+        app:layout_constraintTop_toBottomOf="@id/btn_UPDATE"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

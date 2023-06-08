@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Students App</string>
+    <string name="Add_data">ADD DATA</string>
+    <string name="Display_Data">DISPLAY DATA</string>
+    <string name="Update_Data">UPDATE DATA</string>
+    <string name="Delete_Data">DELETE DATA</string>
+    <string name="close">Close</string>
+    <string name="save">Save</string>
+    <string name="Main_Screen">Back To Main Screen</string>
+</resources>
