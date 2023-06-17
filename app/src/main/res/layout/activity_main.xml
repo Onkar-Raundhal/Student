@@ -5,24 +5,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@drawable/bg">
+    android:background="@drawable/bg"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/Heading"
+        style="@style/TextAppearance.AppCompat.Headline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/TextAppearance.AppCompat.Headline"
-        android:text=" STUDENT PANEL"
-        android:drawableStart="@drawable/student"
-        android:textStyle="bold"
         android:layout_marginTop="20sp"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintEnd_toEndOf="@id/guideline2"
-        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/student_panel"
         android:textSize="30sp"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/student"
         app:layout_constraintBottom_toTopOf="@id/btn_ADD"
-        />
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_ADD"
@@ -38,74 +37,68 @@
         app:layout_constraintBottom_toTopOf="@id/btn_DISPLAY"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/Heading"
-        />
+        app:layout_constraintTop_toBottomOf="@id/Heading" />
 
     <Button
         android:id="@+id/btn_DISPLAY"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_marginTop="30sp"
+        android:drawableTop="@drawable/display"
+        android:elevation="3dp"
+        android:padding="25sp"
         android:text="@string/Display_Data"
         android:textSize="25sp"
-        android:padding="25sp"
-        android:layout_marginTop="30sp"
-        android:elevation="3dp"
-        android:drawableTop="@drawable/display"
-        app:layout_constraintTop_toBottomOf="@id/btn_ADD"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintBottom_toTopOf="@id/btn_UPDATE"
-        />
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/btn_ADD" />
 
     <Button
         android:id="@+id/btn_UPDATE"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_marginTop="30sp"
+        android:drawableTop="@drawable/update"
+        android:elevation="3dp"
+        android:padding="25sp"
         android:text="@string/Update_Data"
         android:textSize="25sp"
-        android:padding="25sp"
-        android:layout_marginTop="30sp"
-        android:elevation="3dp"
-        android:drawableTop="@drawable/update"
-        app:layout_constraintTop_toBottomOf="@id/btn_DISPLAY"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintBottom_toTopOf="@id/btn_DELETE"
-        />
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/btn_DISPLAY" />
 
     <Button
         android:id="@+id/btn_DELETE"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_marginTop="30sp"
+        android:drawableTop="@drawable/delete"
+        android:elevation="3dp"
+        android:padding="25sp"
         android:text="@string/Delete_Data"
         android:textSize="25sp"
-        android:padding="25sp"
-        android:layout_marginTop="30sp"
-        android:elevation="3dp"
-        android:drawableTop="@drawable/delete"
-        app:layout_constraintTop_toBottomOf="@id/btn_UPDATE"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/btn_UPDATE" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05"
-        />
+        app:layout_constraintGuide_percent="0.05" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95"
-        />
+        app:layout_constraintGuide_percent="0.95" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,4 +7,11 @@
     <string name="close">Close</string>
     <string name="save">Save</string>
     <string name="Main_Screen">Back To Main Screen</string>
+    <string name="delete">Delete</string>
+    <string name="add_student"> ADD STUDENT</string>
+    <string name="delete_student"> DELETE STUDENT</string>
+    <string name="display_student_data">DISPLAY STUDENT DATA</string>
+    <string name="student_panel"> STUDENT PANEL</string>
+    <string name="update_data"> UPDATE DATA</string>
+    <string name="update">Update</string>
 </resources>

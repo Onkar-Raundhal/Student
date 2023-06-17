@@ -20,50 +20,62 @@ var isAllFieldsChecked_Update = false
 class Update : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Initialize the database helper
         databasehelper = DatabaseHelper(this)
         setContentView(R.layout.activity_update)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        // Get references to the EditText fields
         val roll = findViewById<EditText>(R.id.update_rollNo)
-        roll.requestFocus()
         val name = findViewById<EditText>(R.id.update_Name)
-        val cnmae = findViewById<EditText>(R.id.update_classname)
+        val classname = findViewById<EditText>(R.id.update_classname)
         val sub1 = findViewById<EditText>(R.id.update_subject1)
         val sub2 = findViewById<EditText>(R.id.update_subject2)
+
+        // Set focus on the roll EditText field
+        roll.requestFocus()
+
+        // Set up animation
         setupAnim()
+
+        // Handle close button click
         val close = findViewById<Button>(R.id.btn_close)
         close.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_left,
-                R.anim.slide_out_right);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
-
+        // Handle update button click
         val update = findViewById<Button>(R.id.btn_update)
         update.setOnClickListener {
-
-            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+            // Check for multiple rapid clicks
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
                 return@setOnClickListener
             }
             mLastClickTime = SystemClock.elapsedRealtime()
 
-            isAllFieldsChecked_Update = CheckAllFields()
+            // Perform field validation
+            isAllFieldsChecked_Update = checkAllFields()
             if (isAllFieldsChecked_Update) {
+                // Show confirmation dialog
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("Are You Sure")
                 builder.setMessage("Want To Update")
                 builder.setIcon(android.R.drawable.ic_dialog_alert)
                 builder.setPositiveButton("Yes") { dialogInterface, which ->
+                    // Perform student data update
                     if (databasehelper.updateStudent(
                             StudentModel(
                                 roll = roll.text.toString().toInt(),
                                 name = name.text.toString(),
-                                classname = cnmae.text.toString(),
+                                classname = classname.text.toString(),
                                 sub1 = sub1.text.toString(),
                                 sub2 = sub2.text.toString()
                             )
                         )
                     ) {
+                        // Show success dialog
                         AestheticDialog.Builder(this, DialogStyle.FLAT, DialogType.SUCCESS)
                             .setTitle("Success")
                             .setMessage("Data Updated Successfully")
@@ -74,39 +86,17 @@ class Update : AppCompatActivity() {
                             .setOnClickListener(object : OnDialogClickListener {
                                 override fun onClick(dialog: AestheticDialog.Builder) {
                                     dialog.dismiss()
-                                    roll.getText().clear();
-                                    name.getText().clear();
-                                    cnmae.getText().clear();
-                                    sub1.getText().clear();
-                                    sub2.getText().clear();
-
+                                    // Clear input fields
+                                    roll.getText().clear()
+                                    name.getText().clear()
+                                    classname.getText().clear()
+                                    sub1.getText().clear()
+                                    sub2.getText().clear()
                                 }
                             })
                             .show()
-
-//                        Toast.makeText(
-//                            applicationContext,
-//                            "Data Updated Successfully",
-//                            Toast.LENGTH_LONG
-//                        )
-//                            .show()
-//                        roll.getText().clear();
-//                        name.getText().clear();
-//                        cnmae.getText().clear();
-//                        sub1.getText().clear();
-//                        sub2.getText().clear();
                     } else {
-//                        Toast.makeText(
-//                            applicationContext,
-//                            "Entered Record Doesn't Exist",
-//                            Toast.LENGTH_LONG
-//                        )
-//                            .show()
-//                        roll.getText().clear();
-//                        name.getText().clear();
-//                        cnmae.getText().clear();
-//                        sub1.getText().clear();
-//                        sub2.getText().clear();
+                        // Show error dialog
                         AestheticDialog.Builder(this, DialogStyle.FLAT, DialogType.ERROR)
                             .setTitle("Alert")
                             .setMessage("Entered Record Doesn't Exist")
@@ -117,24 +107,20 @@ class Update : AppCompatActivity() {
                             .setOnClickListener(object : OnDialogClickListener {
                                 override fun onClick(dialog: AestheticDialog.Builder) {
                                     dialog.dismiss()
-                                    roll.getText().clear();
-                                    name.getText().clear();
-                                    cnmae.getText().clear();
-                                    sub1.getText().clear();
-                                    sub2.getText().clear();
-
+                                    // Clear input fields
+                                    roll.getText().clear()
+                                    name.getText().clear()
+                                    classname.getText().clear()
+                                    sub1.getText().clear()
+                                    sub2.getText().clear()
                                 }
                             })
                             .show()
                     }
                 }
-                //performing cancel action
-//            builder.setNeutralButton("Cancel"){dialogInterface , which ->
-//                Toast.makeText(applicationContext,"clicked cancel\n operation cancel",Toast.LENGTH_LONG).show()
-//            }
                 builder.setNegativeButton("No") { dialogInterface, which ->
-
-                    Toast.makeText(applicationContext, "clicked No", Toast.LENGTH_LONG).show()
+                    // User clicked "No" in the confirmation dialog
+                    Toast.makeText(applicationContext, "Clicked No", Toast.LENGTH_LONG).show()
                 }
                 val alertDialog: AlertDialog = builder.create()
                 alertDialog.setCancelable(false)
@@ -143,36 +129,41 @@ class Update : AppCompatActivity() {
         }
     }
 
-    private fun CheckAllFields(): Boolean {
-        var roll = findViewById<EditText>(R.id.update_rollNo)
+    // Field validation function
+    private fun checkAllFields(): Boolean {
+        val roll = findViewById<EditText>(R.id.update_rollNo)
         val name = findViewById<EditText>(R.id.update_Name)
-        val cnmae = findViewById<EditText>(R.id.update_classname)
+        val classname = findViewById<EditText>(R.id.update_classname)
         val sub1 = findViewById<EditText>(R.id.update_subject1)
         val sub2 = findViewById<EditText>(R.id.update_subject2)
+
+        // Check each field for empty values
         if (roll!!.length() == 0) {
-            roll!!.error = "This field is required"
+            roll.error = "This field is required"
             return false
         }
         if (name!!.length() == 0) {
-            name!!.error = "This field is required"
+            name.error = "This field is required"
             return false
         }
-        if (cnmae!!.length() == 0) {
-            cnmae!!.error = "This field is required"
+        if (classname!!.length() == 0) {
+            classname.error = "This field is required"
             return false
         }
         if (sub1!!.length() == 0) {
-            sub1!!.error = "This field is required"
+            sub1.error = "This field is required"
             return false
         } else if (sub2!!.length() == 0) {
-            sub2!!.error = "This field is required"
+            sub2.error = "This field is required"
             return false
         }
-        // after all validation return true.
+        // All fields are validated
         return true
     }
+
+    // Set up animation
     private fun setupAnim() {
-        val animate= findViewById<LottieAnimationView>(R.id.Lottie_Update)
+        val animate = findViewById<LottieAnimationView>(R.id.Lottie_Update)
         animate.setAnimation(R.raw.update)
         animate.repeatCount = LottieDrawable.INFINITE
         animate.playAnimation()

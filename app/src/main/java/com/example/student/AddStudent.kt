@@ -14,48 +14,76 @@ import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
 import com.thecode.aestheticdialogs.*
 
-class Add_Student : AppCompatActivity() {
+class AddStudent : AppCompatActivity() {
 
+    // Variable to track the last click time
     private var mLastClickTime: Long = 0
+
+    // Database helper instance
     private lateinit var databasehelper: DatabaseHelper
+
+    // Variable to check if all fields are checked
     var isAllFieldsChecked_Add = false
-    var lastclick=0L
+
+    // Variable to track the last click time
+    var lastclick = 0L
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_student)
+
+        // Set up animation
         setupAnim()
+
+        // Enable back button in the action bar
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        // Initialize database helper
         databasehelper = DatabaseHelper(this)
+
+        // Set the roll number field with the next available roll number
         val roll = findViewById<EditText>(R.id.Add_rollNo)
-        roll.setText("${databasehelper.getrollno().plus(1)}")
-        Log.d("check", "RollNo: ${databasehelper.getrollno()}")
+        roll.setText("${databasehelper.getRollNo().plus(1)}")
+
+        Log.d("check", "RollNo: ${databasehelper.getRollNo()}")
+
         val name = findViewById<EditText>(R.id.Add_Name)
         name.requestFocus()
         val cnmae = findViewById<EditText>(R.id.Add_classname)
         val sub1 = findViewById<EditText>(R.id.Add_subject1)
         val sub2 = findViewById<EditText>(R.id.Add_subject2)
         val close = findViewById<Button>(R.id.add_btn_close)
+
+        // Close button click listener
         close.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_left,
-                R.anim.slide_out_right);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
         val save = findViewById<Button>(R.id.add_btn_save)
+
+        // Save button click listener
         save.setOnClickListener {
-            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+            // Check if the button was clicked too quickly (within 1 second)
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
                 return@setOnClickListener
             }
             mLastClickTime = SystemClock.elapsedRealtime()
+
+            // Check if all fields are filled
             isAllFieldsChecked_Add = CheckAllFields()
+
             if (isAllFieldsChecked_Add) {
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("Are You Sure")
                 builder.setMessage("Want To Proceed")
                 builder.setIcon(android.R.drawable.ic_dialog_alert)
+
+                // Yes button click listener
                 builder.setPositiveButton("Yes") { dialogInterface, which ->
-                    databasehelper.addstudents(
+                    // Add student data to the database
+                    databasehelper.addStudent(
                         StudentModel(
                             name = name.text.toString(),
                             classname = cnmae.text.toString(),
@@ -63,6 +91,8 @@ class Add_Student : AppCompatActivity() {
                             sub2 = sub2.text.toString()
                         )
                     )
+
+                    // Show success dialog using AestheticDialog library
                     AestheticDialog.Builder(this, DialogStyle.FLAT, DialogType.SUCCESS)
                         .setTitle("Success")
                         .setMessage("Data Inserted Successfully")
@@ -72,75 +102,73 @@ class Add_Student : AppCompatActivity() {
                         .setAnimation(DialogAnimation.ZOOM)
                         .setOnClickListener(object : OnDialogClickListener {
                             override fun onClick(dialog: AestheticDialog.Builder) {
-//                                Toast.makeText(applicationContext, "Data Inserted Successfully", Toast.LENGTH_LONG)
-//                                    .show()
                                 dialog.dismiss()
-                                name.getText().clear();
-                                cnmae.getText().clear();
-                                sub1.getText().clear();
-                                sub2.getText().clear();
+
+                                // Clear input fields
+                                name.getText().clear()
+                                cnmae.getText().clear()
+                                sub1.getText().clear()
+                                sub2.getText().clear()
+
+                                // Refresh the activity
                                 inter()
                             }
                         })
                         .show()
-
-//                    val intent = Intent(this, MainActivity::class.java)
-//                    startActivity(intent)
-
-//                    val intent = Intent(this, Add_Student::class.java)
-//                    overridePendingTransition(0, 0);
-//                    startActivity(intent);
-//                    overridePendingTransition(0, 0);
-
                 }
-                //performing cancel action
-//            builder.setNeutralButton("Cancel"){dialogInterface , which ->
-//                Toast.makeText(applicationContext,"clicked cancel\n operation cancel",Toast.LENGTH_LONG).show()
-//            }
-                builder.setNegativeButton("No") { dialogInterface, which ->
 
+                // No button click listener
+                builder.setNegativeButton("No") { dialogInterface, which ->
                     Toast.makeText(applicationContext, "clicked No", Toast.LENGTH_LONG).show()
                 }
+
                 val alertDialog: AlertDialog = builder.create()
                 alertDialog.setCancelable(false)
                 alertDialog.show()
-
             }
-
         }
     }
+
+    // Check if all input fields are filled
     private fun CheckAllFields(): Boolean {
         val name = findViewById<EditText>(R.id.Add_Name)
         val cnmae = findViewById<EditText>(R.id.Add_classname)
         val sub1 = findViewById<EditText>(R.id.Add_subject1)
         val sub2 = findViewById<EditText>(R.id.Add_subject2)
+
         if (name!!.length() == 0) {
             name!!.error = "This field is required"
             return false
         }
+
         if (cnmae!!.length() == 0) {
             cnmae!!.error = "This field is required"
             return false
         }
+
         if (sub1!!.length() == 0) {
             sub1!!.error = "This field is required"
             return false
-        }
-        else if (sub2!!.length() == 0) {
+        } else if (sub2!!.length() == 0) {
             sub2!!.error = "This field is required"
             return false
         }
-        // after all validation return true.
+
+        // All fields are filled
         return true
     }
-    private fun inter(){
-        val intent = Intent(this, Add_Student::class.java)
-        overridePendingTransition(0, 0);
-        startActivity(intent);
-        overridePendingTransition(0, 0);
+
+    // Refresh the activity
+    private fun inter() {
+        val intent = Intent(this, AddStudent::class.java)
+        overridePendingTransition(0, 0)
+        startActivity(intent)
+        overridePendingTransition(0, 0)
     }
+
+    // Set up animation for the activity
     private fun setupAnim() {
-        val animate= findViewById<LottieAnimationView>(R.id.Lottie_Add)
+        val animate = findViewById<LottieAnimationView>(R.id.Lottie_Add)
         animate.setAnimation(R.raw.add)
         animate.repeatCount = LottieDrawable.INFINITE
         animate.playAnimation()

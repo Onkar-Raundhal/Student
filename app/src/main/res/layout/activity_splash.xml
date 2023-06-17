@@ -7,22 +7,12 @@
     android:background="@drawable/splash"
     tools:context=".Splash">
 
-
-<!--    <com.airbnb.lottie.LottieAnimationView-->
-<!--        android:id="@+id/lottiesplash"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
     <ImageView
         android:id="@+id/spash_image1"
         android:layout_width="300dp"
         android:layout_height="200dp"
-        android:src="@drawable/graduates"
         android:elevation="8dp"
+        android:src="@drawable/graduates"
         app:layout_constraintBottom_toTopOf="@id/appname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,13 +23,13 @@
         android:id="@+id/appname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:elevation="8dp"
         android:fontFamily="@font/montserrat_alternates"
         android:text="@string/app_name"
         android:textSize="50sp"
-        android:elevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spash_image1" />
 </androidx.constraintlayout.widget.ConstraintLayout>
