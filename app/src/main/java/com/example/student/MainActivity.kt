@@ -32,6 +32,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        finish()
+    }
+
     private fun navigateToAddStudent() {
         val intent = Intent(this, AddStudent::class.java)
         startActivity(intent)

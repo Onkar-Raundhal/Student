@@ -129,6 +129,10 @@ class AddStudent : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        navigateToMain()
+    }
+
     // Check if all input fields are filled
     private fun CheckAllFields(): Boolean {
         val name = findViewById<EditText>(R.id.Add_Name)
@@ -172,5 +176,11 @@ class AddStudent : AppCompatActivity() {
         animate.setAnimation(R.raw.add)
         animate.repeatCount = LottieDrawable.INFINITE
         animate.playAnimation()
+    }
+
+    private fun navigateToMain() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 }
