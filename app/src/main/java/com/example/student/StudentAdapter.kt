@@ -6,31 +6,32 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.student.R
 import com.example.student.StudentModel
 
-class StudentAdapter: RecyclerView.Adapter<StudentAdapter.StudentViewHolder>() {
+class StudentAdapter : RecyclerView.Adapter<StudentAdapter.StudentViewHolder>() {
 
-    private var stdlist: ArrayList<StudentModel> = ArrayList()
+    private var stdList: ArrayList<StudentModel> = ArrayList()
 
     // Method to update the adapter data with new items
     fun addItems(items: ArrayList<StudentModel>) {
-        this.stdlist = items
+        this.stdList = items
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder {
         // Inflate the item view layout and create a new StudentViewHolder
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.stud_items, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.stud_items, parent, false)
         return StudentViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: StudentViewHolder, position: Int) {
         // Retrieve the student at the given position and bind it to the ViewHolder
-        val student = stdlist[position]
+        val student = stdList[position]
         holder.bindView(student)
     }
 
     override fun getItemCount(): Int {
         // Return the total number of students in the list
-        return stdlist.size
+        return stdList.size
     }
 
     // ViewHolder class representing an item view in the RecyclerView

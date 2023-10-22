@@ -1,17 +1,20 @@
 package com.example.student
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.Gravity
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
-import com.thecode.aestheticdialogs.*
+import com.thecode.aestheticdialogs.AestheticDialog
+import com.thecode.aestheticdialogs.DialogAnimation
+import com.thecode.aestheticdialogs.DialogStyle
+import com.thecode.aestheticdialogs.DialogType
+import com.thecode.aestheticdialogs.OnDialogClickListener
 
 private var mLastClickTime: Long = 0
 private lateinit var databaseHelper: DatabaseHelper
@@ -62,7 +65,7 @@ class Delete : AppCompatActivity() {
                             .setOnClickListener(object : OnDialogClickListener {
                                 override fun onClick(dialog: AestheticDialog.Builder) {
                                     dialog.dismiss()
-                                    delEditText.getText().clear()
+                                    delEditText.text.clear()
                                 }
                             })
                             .show()
@@ -78,7 +81,7 @@ class Delete : AppCompatActivity() {
                             .setOnClickListener(object : OnDialogClickListener {
                                 override fun onClick(dialog: AestheticDialog.Builder) {
                                     dialog.dismiss()
-                                    delEditText.getText().clear()
+                                    delEditText.text.clear()
                                 }
                             })
                             .show()
@@ -96,8 +99,8 @@ class Delete : AppCompatActivity() {
 
     private fun checkAllFields(): Boolean {
         val rollEditText = findViewById<EditText>(R.id.delete_roll)
-        if (rollEditText!!.length() == 0) {
-            rollEditText!!.error = "This field is required"
+        if (rollEditText.length() == 0) {
+            rollEditText.error = "This field is required"
             return false
         }
         // All fields have been checked and are valid

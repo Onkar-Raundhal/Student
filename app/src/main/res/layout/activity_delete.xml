@@ -15,6 +15,7 @@
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/Lottie_Delete"
             android:layout_width="0dp"
+            app:lottie_repeatCount="0"
             android:layout_height="300dp"
             app:layout_constraintBottom_toTopOf="@id/txtl511"
             app:layout_constraintEnd_toEndOf="@id/guideline2"

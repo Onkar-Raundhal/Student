@@ -1,7 +1,6 @@
 package com.example.student
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.Gravity
@@ -9,19 +8,25 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
-import com.thecode.aestheticdialogs.*
+import com.example.student.MainActivity.Companion.filter
+import com.thecode.aestheticdialogs.AestheticDialog
+import com.thecode.aestheticdialogs.DialogAnimation
+import com.thecode.aestheticdialogs.DialogStyle
+import com.thecode.aestheticdialogs.DialogType
+import com.thecode.aestheticdialogs.OnDialogClickListener
 
 private var mLastClickTime: Long = 0
-private lateinit var databasehelper: DatabaseHelper
+private lateinit var databaseHelper: DatabaseHelper
 var isAllFieldsChecked_Update = false
 
 class Update : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Initialize the database helper
-        databasehelper = DatabaseHelper(this)
+        databaseHelper = DatabaseHelper(this)
         setContentView(R.layout.activity_update)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
@@ -31,6 +36,8 @@ class Update : AppCompatActivity() {
         val classname = findViewById<EditText>(R.id.update_classname)
         val sub1 = findViewById<EditText>(R.id.update_subject1)
         val sub2 = findViewById<EditText>(R.id.update_subject2)
+        sub1.filters = arrayOf(filter)
+        sub2.filters = arrayOf(filter)
 
         // Set focus on the roll EditText field
         roll.requestFocus()
@@ -65,7 +72,7 @@ class Update : AppCompatActivity() {
                 builder.setIcon(android.R.drawable.ic_dialog_alert)
                 builder.setPositiveButton("Yes") { dialogInterface, which ->
                     // Perform student data update
-                    if (databasehelper.updateStudent(
+                    if (databaseHelper.updateStudent(
                             StudentModel(
                                 roll = roll.text.toString().toInt(),
                                 name = name.text.toString(),
@@ -87,11 +94,11 @@ class Update : AppCompatActivity() {
                                 override fun onClick(dialog: AestheticDialog.Builder) {
                                     dialog.dismiss()
                                     // Clear input fields
-                                    roll.getText().clear()
-                                    name.getText().clear()
-                                    classname.getText().clear()
-                                    sub1.getText().clear()
-                                    sub2.getText().clear()
+                                    roll.text.clear()
+                                    name.text.clear()
+                                    classname.text.clear()
+                                    sub1.text.clear()
+                                    sub2.text.clear()
                                 }
                             })
                             .show()
@@ -108,11 +115,11 @@ class Update : AppCompatActivity() {
                                 override fun onClick(dialog: AestheticDialog.Builder) {
                                     dialog.dismiss()
                                     // Clear input fields
-                                    roll.getText().clear()
-                                    name.getText().clear()
-                                    classname.getText().clear()
-                                    sub1.getText().clear()
-                                    sub2.getText().clear()
+                                    roll.text.clear()
+                                    name.text.clear()
+                                    classname.text.clear()
+                                    sub1.text.clear()
+                                    sub2.text.clear()
                                 }
                             })
                             .show()
@@ -136,24 +143,26 @@ class Update : AppCompatActivity() {
         val classname = findViewById<EditText>(R.id.update_classname)
         val sub1 = findViewById<EditText>(R.id.update_subject1)
         val sub2 = findViewById<EditText>(R.id.update_subject2)
+        sub1.filters = arrayOf(filter)
+        sub2.filters = arrayOf(filter)
 
         // Check each field for empty values
-        if (roll!!.length() == 0) {
+        if (roll.length() == 0) {
             roll.error = "This field is required"
             return false
         }
-        if (name!!.length() == 0) {
+        if (name.length() == 0) {
             name.error = "This field is required"
             return false
         }
-        if (classname!!.length() == 0) {
+        if (classname.length() == 0) {
             classname.error = "This field is required"
             return false
         }
-        if (sub1!!.length() == 0) {
+        if (sub1.length() == 0) {
             sub1.error = "This field is required"
             return false
-        } else if (sub2!!.length() == 0) {
+        } else if (sub2.length() == 0) {
             sub2.error = "This field is required"
             return false
         }

@@ -68,6 +68,7 @@
                 android:layout_height="wrap_content"
                 android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXY"
                 android:imeOptions="actionNext"
+                android:maxLength="15"
                 android:inputType="textPersonName"
                 android:singleLine="true" />
 
@@ -93,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXY"
                 android:imeOptions="actionNext"
+                android:maxLength="10"
                 android:inputType="text"
                 android:singleLine="true" />
 
@@ -173,6 +175,7 @@
             android:id="@+id/Lottie_Add"
             android:layout_width="0dp"
             android:layout_height="200dp"
+            app:lottie_repeatCount="0"
             app:layout_constraintBottom_toTopOf="@id/txtl11"
             app:layout_constraintEnd_toEndOf="@id/guideline2"
             app:layout_constraintStart_toStartOf="@id/guideline1"

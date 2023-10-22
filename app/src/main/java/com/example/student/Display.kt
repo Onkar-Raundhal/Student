@@ -3,18 +3,17 @@ package com.example.student
 import StudentAdapter
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class Display : AppCompatActivity() {
 
-    var studentModel: StudentModel? = null
+    private var studentModel: StudentModel? = null
     private lateinit var databaseHelper: DatabaseHelper
     private lateinit var recyclerView: RecyclerView
     private var adapter: StudentAdapter? = null
@@ -35,7 +34,6 @@ class Display : AppCompatActivity() {
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
-        initView()
         initRecyclerView()
         getData()
 
@@ -52,13 +50,10 @@ class Display : AppCompatActivity() {
 
     private fun initRecyclerView() {
         recyclerView = findViewById<RecyclerView>(R.id.rv_dispdata)
-        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         adapter = StudentAdapter()
         recyclerView.adapter = adapter
     }
 
-    private fun initView() {
-        // Removed redundant findViewById calls since they are already defined in the class
-        // No need to redeclare them here
-    }
 }

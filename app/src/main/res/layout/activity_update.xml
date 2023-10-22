@@ -30,6 +30,7 @@
             android:id="@+id/Lottie_Update"
             android:layout_width="0dp"
             android:layout_height="200dp"
+            app:lottie_repeatCount="0"
             app:layout_constraintBottom_toTopOf="@id/guideline1H"
             app:layout_constraintEnd_toEndOf="@id/guideline2"
             app:layout_constraintStart_toStartOf="@id/guideline1"
